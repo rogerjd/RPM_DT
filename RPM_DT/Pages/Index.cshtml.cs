@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace RPM_DT.Pages
 {
@@ -28,6 +29,11 @@ namespace RPM_DT.Pages
             string ConnStr = _configuration.GetConnectionString("RazorPagesMovieContext");
             SqlConnection conn = new SqlConnection(ConnStr);
             conn.Open();
+            SqlCommand command = new SqlCommand("Select * from Movie", conn);
+            SqlDataAdapter da = new SqlDataAdapter(command);
+            DataTable tbl = new DataTable();
+            da.Fill(tbl);
+
             conn.Close();
         }
     }
