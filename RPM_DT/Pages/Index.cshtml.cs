@@ -16,7 +16,8 @@ namespace RPM_DT.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IConfiguration _configuration;
-        private readonly string ConnStr;
+
+        public DataTable Movie { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger, IConfiguration configuration)
         {
@@ -31,8 +32,8 @@ namespace RPM_DT.Pages
             conn.Open();
             SqlCommand command = new SqlCommand("Select * from Movie", conn);
             SqlDataAdapter da = new SqlDataAdapter(command);
-            DataTable tbl = new DataTable();
-            da.Fill(tbl);
+            Movie = new DataTable();
+            da.Fill(Movie);
 
             conn.Close();
         }
