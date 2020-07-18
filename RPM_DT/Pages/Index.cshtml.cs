@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
+using System.Data.SqlClient;
 
 namespace RPM_DT.Pages
 {
@@ -14,6 +15,7 @@ namespace RPM_DT.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IConfiguration _configuration;
+        private readonly string ConnStr;
 
         public IndexModel(ILogger<IndexModel> logger, IConfiguration configuration)
         {
@@ -23,7 +25,10 @@ namespace RPM_DT.Pages
 
         public void OnGet()
         {
-            string connStr = _configuration.GetConnectionString("RazorPagesMovieContext");
+            string ConnStr = _configuration.GetConnectionString("RazorPagesMovieContext");
+            SqlConnection conn = new SqlConnection(ConnStr);
+            conn.Open();
+            conn.Close();
         }
     }
 }
