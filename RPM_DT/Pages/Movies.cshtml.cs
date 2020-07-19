@@ -25,13 +25,13 @@ namespace RPM_DT.Pages
         {
             string ConnStr = _configuration.GetConnectionString("RazorPagesMovieContext");
             SqlConnection conn = new SqlConnection(ConnStr);
-            conn.Open();
+            //conn.TimeOut  set in ConnStr
+            ///conn.Open();
             SqlCommand command = new SqlCommand("Select * from Movie", conn);
             SqlDataAdapter da = new SqlDataAdapter(command);
             Movie = new DataTable();
             da.Fill(Movie);
-
-            conn.Close();
+            //conn.Close();
         }
     }
 }
