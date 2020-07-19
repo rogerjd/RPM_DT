@@ -1,5 +1,7 @@
 ﻿@page
 
+@using System.Data;
+
 @model RPM_DT.Pages.MoviesModel
 @{
     ViewData["Title"] = "Movies";
@@ -7,4 +9,24 @@
 
 <h1>Movies</h1>
 Number of movies @Model.Movie.Rows.Count
+
+<table cellpadding="0" cellspacing="0">
+    <tr>
+        <th>Title</th>
+        <th>Genre</th>
+        <th>Price</th>
+        <th>Release Date</th>
+        <th>Rating</th>
+    </tr>
+    @foreach (DataRow row in Model.Movie.Rows)
+    {
+        <tr>
+            <td>@row["Title"]</td>
+            <td>@row["Genre"]</td>
+            <td>@row["Price"]</td>
+            <td>@row["ReleaseDate"]</td>
+            <td>@row["Rating"]</td>
+        </tr>
+    }
+</table>
 
