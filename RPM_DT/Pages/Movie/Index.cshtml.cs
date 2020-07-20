@@ -23,15 +23,9 @@ namespace RPM_DT.Pages
 
         public void OnGet()
         {
-            string ConnStr = _configuration.GetConnectionString("RazorPagesMovieContext");
-            SqlConnection conn = new SqlConnection(ConnStr);
-            //conn.TimeOut  set in ConnStr
-            ///conn.Open();
-            SqlCommand command = new SqlCommand("Select * from Movie", conn);
-            SqlDataAdapter da = new SqlDataAdapter(command);
-            Movie = new DataTable();
-            da.Fill(Movie);
-            //conn.Close();
+            Movie = DB.Database.GetMovies(_configuration);
+
+          
         }
     }
 }
