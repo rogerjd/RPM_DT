@@ -20,6 +20,7 @@ namespace RPM_DT.DB
             return command;
         }
 
+        #region "Movie"
         static public DataTable GetMovies(IConfiguration configuration)
         {
             SqlCommand cmd = GetSqlCommand(configuration, "MovieGet");
@@ -28,5 +29,26 @@ namespace RPM_DT.DB
             da.Fill(tbl);
             return tbl;
         }
+
+        static public int NewMovie(IConfiguration configuration, string Title, string genre, decimal price, DateTime releaseDate, string rating)
+        {
+            SqlCommand cmd = GetSqlCommand(configuration, "MovieNew");
+            cmd.Parameters.AddWithValue("Title", Title);
+            cmd.Parameters.AddWithValue("Genre", genre);
+            cmd.Parameters.AddWithValue("ReleaseDate", releaseDate);
+            cmd.Parameters.AddWithValue("Price", price);
+            cmd.Parameters.AddWithValue("Rating", rating);
+            cmd.Connection.Open();
+            try
+            {
+                int n = cmd.ExecuteNonQuery();
+                return n;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+        }
+        #endregion
     }
 }
