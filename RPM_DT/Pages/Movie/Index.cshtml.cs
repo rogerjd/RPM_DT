@@ -24,8 +24,6 @@ namespace RPM_DT.Pages
         public void OnGet()
         {
             Movie = DB.Database.GetMovies(_configuration);
-
-          
         }
     }
 }
