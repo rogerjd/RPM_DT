@@ -13,6 +13,21 @@ namespace RPM_DT.Pages.Movie
     {
         private readonly IConfiguration _configuration;
 
+        [BindProperty]
+        public string Title { get; set; }
+
+        [BindProperty]
+        public string Genre { get; set; }
+
+        [BindProperty]
+        public decimal Price { get; set; }
+
+        [BindProperty]
+        public DateTime ReleaseDate { get; set; }
+
+        [BindProperty]
+        public string Rating { get; set; }
+
         public CreateModel(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -23,12 +38,12 @@ namespace RPM_DT.Pages.Movie
 
         }
 
-        public async Task<IActionResult> OnPostAsync([Required] string Title, string Genre, decimal Price, DateTime ReleaseDate, string Rating)
+        public async Task<IActionResult> OnPostAsync() //[Required] string Title, string Genre, decimal Price, DateTime ReleaseDate, string Rating)
         {
             if (ModelState.IsValid)
             {
-                DB.Database.NewMovie(_configuration, Title, Genre, Price, ReleaseDate, Rating);
-                return RedirectToPage("/Movie/Index");
+                var res = DB.Database.NewMovie(_configuration, Title, Genre, Price, ReleaseDate, Rating);
+                 return RedirectToPage("/Movie/Index");
             }
             return Page();
         }
