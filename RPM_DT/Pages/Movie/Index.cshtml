@@ -1,6 +1,7 @@
 ﻿@page
 
 @using System.Data;
+@using Funcs;
 
 @model RPM_DT.Pages.MoviesModel
 
@@ -28,22 +29,11 @@ Number of movies @Model.Movie.Rows.Count
             <td>@row["Title"]</td>
             <td>@row["Genre"]</td>
             <td>@row["Price"]</td>
-            <td>@getDate(row["ReleaseDate"])</td>
+            <td>@Util.getDate(row["ReleaseDate"])</td>
             <td>@row["Rating"]</td>
         </tr>
     }
 </table>
 
 @functions{
-    string getDate(object obj)
-    {
-        if (obj is DateTime dt)
-        {
-            return dt.ToShortDateString();
-        }
-        else
-        {
-            return "";
-        }
-    }
 }
