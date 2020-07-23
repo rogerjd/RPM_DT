@@ -25,5 +25,17 @@ namespace RPM_DT.Pages
         {
             Movie = DB.Database.GetMovies(_configuration);
         }
+
+        string getDate(object obj)
+        {
+            if (obj is DateTime dt)
+            {
+                return dt.ToShortDateString();
+            }
+            else
+            {
+                return "";
+            }
+        }
     }
 }

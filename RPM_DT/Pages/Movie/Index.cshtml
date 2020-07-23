@@ -3,12 +3,14 @@
 @using System.Data;
 
 @model RPM_DT.Pages.MoviesModel
+
 @{
     ViewData["Title"] = "Movies";
 }
 
 <h1>Movies</h1>
-Number of movies @Model.Movie.Rows.Count <br />
+Number of movies @Model.Movie.Rows.Count
+<br />
 
 <a asp-page="Create">Create New</a>
 
@@ -26,9 +28,22 @@ Number of movies @Model.Movie.Rows.Count <br />
             <td>@row["Title"]</td>
             <td>@row["Genre"]</td>
             <td>@row["Price"]</td>
-            <td>@row["ReleaseDate"]</td>
+            <td>@getDate(row["ReleaseDate"])</td>
             <td>@row["Rating"]</td>
         </tr>
     }
 </table>
 
+@functions{
+    string getDate(object obj)
+    {
+        if (obj is DateTime dt)
+        {
+            return dt.ToShortDateString();
+        }
+        else
+        {
+            return "";
+        }
+    }
+}
