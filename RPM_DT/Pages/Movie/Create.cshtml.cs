@@ -23,6 +23,7 @@ namespace RPM_DT.Pages.Movie
         public decimal Price { get; set; }
 
         [BindProperty, Required]
+        [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
 
         [BindProperty, Required]
@@ -32,7 +33,7 @@ namespace RPM_DT.Pages.Movie
         {
             _configuration = configuration;
 
-            ReleaseDate = DateTime.Now;
+            ReleaseDate = DateTime.Today.Date;
         }
 
         public void OnGet()
