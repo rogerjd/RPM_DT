@@ -1,0 +1,5 @@
+﻿CREATE PROCEDURE [dbo].[MoviesGet]
+AS
+	SELECT *
+	FROM Movie
+RETURN 0
