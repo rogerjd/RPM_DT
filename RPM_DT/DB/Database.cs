@@ -30,14 +30,14 @@ namespace RPM_DT.DB
             return tbl;
         }
 
-        static public int NewMovie(IConfiguration configuration, string Title, string genre, decimal price, DateTime releaseDate, string rating)
+        static public int NewMovie(IConfiguration configuration, Movie movie)
         {
             SqlCommand cmd = GetSqlCommand(configuration, "MovieNew");
-            cmd.Parameters.AddWithValue("Title", Title);
-            cmd.Parameters.AddWithValue("Genre", genre);
-            cmd.Parameters.AddWithValue("ReleaseDate", releaseDate);
-            cmd.Parameters.AddWithValue("Price", price);
-            cmd.Parameters.AddWithValue("Rating", rating);
+            cmd.Parameters.AddWithValue("Title", movie.Title);
+            cmd.Parameters.AddWithValue("Genre", movie.Genre);
+            cmd.Parameters.AddWithValue("ReleaseDate", movie.ReleaseDate);
+            cmd.Parameters.AddWithValue("Price", movie.Price);
+            cmd.Parameters.AddWithValue("Rating", movie.Rating);
             cmd.Connection.Open();
             try
             {

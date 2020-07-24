@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.Configuration;
+using RPM_DT;
 
 namespace RPM_DT.Pages.Movie
 {
@@ -13,27 +14,31 @@ namespace RPM_DT.Pages.Movie
     {
         private readonly IConfiguration _configuration;
 
-        [BindProperty, Required]
-        public string Title { get; set; }
+        [BindProperty]
+        public DB.Movie Movie { get; set; }
 
-        [BindProperty, Required]
-        public string Genre { get; set; }
+        /*
+                [BindProperty, Required]
+                public string Title { get; set; }
 
-        [BindProperty, Required]
-        public decimal Price { get; set; }
+                [BindProperty, Required]
+                public string Genre { get; set; }
 
-        [BindProperty, Required]
-        [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
+                [BindProperty, Required]
+                public decimal Price { get; set; }
 
-        [BindProperty, Required]
-        public string Rating { get; set; }
+                [BindProperty, Required]
+                [DataType(DataType.Date)]
+                public DateTime ReleaseDate { get; set; }
+
+                [BindProperty, Required]
+                public string Rating { get; set; }
+        */
 
         public CreateModel(IConfiguration configuration)
         {
             _configuration = configuration;
-
-            ReleaseDate = DateTime.Today.Date;
+            Movie = new DB.Movie { ReleaseDate = DateTime.Today.Date };
         }
 
         public void OnGet()
@@ -46,7 +51,7 @@ namespace RPM_DT.Pages.Movie
         {
             if (ModelState.IsValid)
             {
-                var res = DB.Database.NewMovie(_configuration, Title, Genre, Price, ReleaseDate, Rating);
+                var res = DB.Database.NewMovie(_configuration, Movie);
                 return RedirectToPage("/Movie/Index");
             }
             return Page();
