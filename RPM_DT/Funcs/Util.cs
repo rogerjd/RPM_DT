@@ -7,7 +7,7 @@ namespace RPM_DT.Funcs
 {
     static  public class Util
     {
-        static public string getDate(object obj)
+        static public string GetFmtdDate(object obj)
         {
             if (obj is DateTime dt)
             {

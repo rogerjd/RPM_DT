@@ -29,7 +29,7 @@ Number of movies @Model.Movie.Rows.Count
             <td>@row["Title"]</td>
             <td>@row["Genre"]</td>
             <td>@row["Price"]</td>
-            <td>@Util.getDate(row["ReleaseDate"])</td>
+            <td>@Util.GetFmtdDate(row["ReleaseDate"])</td>
             <td>@row["Rating"]</td>
         </tr>
     }
