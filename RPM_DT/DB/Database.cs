@@ -23,7 +23,7 @@ namespace RPM_DT.DB
         #region "Movie"
         static public DataTable GetMovies(IConfiguration configuration)
         {
-            SqlCommand cmd = GetSqlCommand(configuration, "MovieGet");
+            SqlCommand cmd = GetSqlCommand(configuration, "MoviesGet");
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable tbl = new DataTable();
             da.Fill(tbl);

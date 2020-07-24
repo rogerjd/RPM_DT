@@ -9,9 +9,21 @@ namespace RPM_DT.Pages.Movie
 {
     public class EditModel : PageModel
     {
-        public void OnGet()
+        public ActionResult OnGet(int? Id)
         {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            return Page();
 
+            //Movie = await _context.Movie.FirstOrDefaultAsync(m => m.ID == id);
+
+            //if (Movie == null)
+            //{
+            //    return NotFound();
+            //}
+            //return Page();
         }
     }
 }
