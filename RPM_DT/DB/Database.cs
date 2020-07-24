@@ -30,6 +30,16 @@ namespace RPM_DT.DB
             return tbl;
         }
 
+        static public DataTable GetMovie(IConfiguration configuration, int id)
+        {
+            SqlCommand cmd = GetSqlCommand(configuration, "MovieGet");
+            cmd.Parameters.AddWithValue("Id", id);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable tbl = new DataTable();
+            da.Fill(tbl);
+            return tbl;
+        }
+
         static public int NewMovie(IConfiguration configuration, Movie movie)
         {
             SqlCommand cmd = GetSqlCommand(configuration, "MovieNew");
