@@ -35,11 +35,6 @@ namespace RPM_DT.DB
         {
             SqlCommand cmd = GetSqlCommand(configuration, "MovieUpdate");
             cmd.Parameters.AddRange(movie.DBParams(true));
-            //cmd.Parameters.AddWithValue("Title", movie.Title);
-            //cmd.Parameters.AddWithValue("Genre", movie.Genre);
-            //cmd.Parameters.AddWithValue("ReleaseDate", movie.ReleaseDate);
-            //cmd.Parameters.AddWithValue("Price", movie.Price);
-            //cmd.Parameters.AddWithValue("Rating", movie.Rating);
             cmd.Connection.Open();
             try
             {
@@ -57,7 +52,7 @@ namespace RPM_DT.DB
             SqlCommand cmd = GetSqlCommand(configuration, "MovieGet");
             cmd.Parameters.AddWithValue("Id", id);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable tbl = new DataTable();  
+            DataTable tbl = new DataTable();
             da.Fill(tbl);
             if (tbl.Rows.Count == 0)
             {
@@ -71,11 +66,6 @@ namespace RPM_DT.DB
         {
             SqlCommand cmd = GetSqlCommand(configuration, "MovieNew");
             cmd.Parameters.AddRange(movie.DBParams(false));
-            //cmd.Parameters.AddWithValue("Title", movie.Title);
-            //cmd.Parameters.AddWithValue("Genre", movie.Genre);
-            //cmd.Parameters.AddWithValue("ReleaseDate", movie.ReleaseDate);
-            //cmd.Parameters.AddWithValue("Price", movie.Price);
-            //cmd.Parameters.AddWithValue("Rating", movie.Rating);
             cmd.Connection.Open();
             try
             {
@@ -88,25 +78,6 @@ namespace RPM_DT.DB
             }
         }
 
-        static public int UpdateMovie(IConfiguration configuration, Movie movie)
-        {
-            SqlCommand cmd = GetSqlCommand(configuration, "MovieUpdt");
-            cmd.Parameters.AddWithValue("Title", movie.Title);
-            cmd.Parameters.AddWithValue("Genre", movie.Genre);
-            cmd.Parameters.AddWithValue("ReleaseDate", movie.ReleaseDate);
-            cmd.Parameters.AddWithValue("Price", movie.Price);
-            cmd.Parameters.AddWithValue("Rating", movie.Rating);
-            cmd.Connection.Open();
-            try
-            {
-                int n = cmd.ExecuteNonQuery();
-                return n;
-            }
-            finally
-            {
-                cmd.Connection.Close();
-            }
-        }
         #endregion
     }
 }
