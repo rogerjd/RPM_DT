@@ -31,6 +31,27 @@ namespace RPM_DT.DB
             return tbl;
         }
 
+        internal static int EditMovie(IConfiguration configuration, Movie movie)
+        {
+            SqlCommand cmd = GetSqlCommand(configuration, "MovieUpdate");
+            cmd.Parameters.AddRange(movie.DBParams(true));
+            //cmd.Parameters.AddWithValue("Title", movie.Title);
+            //cmd.Parameters.AddWithValue("Genre", movie.Genre);
+            //cmd.Parameters.AddWithValue("ReleaseDate", movie.ReleaseDate);
+            //cmd.Parameters.AddWithValue("Price", movie.Price);
+            //cmd.Parameters.AddWithValue("Rating", movie.Rating);
+            cmd.Connection.Open();
+            try
+            {
+                int n = cmd.ExecuteNonQuery();
+                return n;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+        }
+
         static public Movie GetMovie(IConfiguration configuration, int id)
         {
             SqlCommand cmd = GetSqlCommand(configuration, "MovieGet");
@@ -42,26 +63,19 @@ namespace RPM_DT.DB
             {
                 return null;
             }
-            var m = new Movie
-            {
-                Id = (int)tbl.Rows[0]["Id"],
-                Title = (string)tbl.Rows[0]["Title"],
-                Genre = (string)tbl.Rows[0]["Genre"],
-                Price = (decimal)tbl.Rows[0]["Price"],
-                ReleaseDate = (DateTime)tbl.Rows[0]["Price"],
-                Rating = (string)tbl.Rows[0]["Rating"]
-            };
+            var m = new Movie(tbl.Rows[0]);
             return m;
         }
 
         static public int NewMovie(IConfiguration configuration, Movie movie)
         {
             SqlCommand cmd = GetSqlCommand(configuration, "MovieNew");
-            cmd.Parameters.AddWithValue("Title", movie.Title);
-            cmd.Parameters.AddWithValue("Genre", movie.Genre);
-            cmd.Parameters.AddWithValue("ReleaseDate", movie.ReleaseDate);
-            cmd.Parameters.AddWithValue("Price", movie.Price);
-            cmd.Parameters.AddWithValue("Rating", movie.Rating);
+            cmd.Parameters.AddRange(movie.DBParams(false));
+            //cmd.Parameters.AddWithValue("Title", movie.Title);
+            //cmd.Parameters.AddWithValue("Genre", movie.Genre);
+            //cmd.Parameters.AddWithValue("ReleaseDate", movie.ReleaseDate);
+            //cmd.Parameters.AddWithValue("Price", movie.Price);
+            //cmd.Parameters.AddWithValue("Rating", movie.Rating);
             cmd.Connection.Open();
             try
             {

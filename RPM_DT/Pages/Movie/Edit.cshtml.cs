@@ -36,5 +36,23 @@ namespace RPM_DT.Pages.Movie
             }
             return Page();
         }
+
+        public IActionResult OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+                var res = DB.Database.EditMovie(_configuration, Movie);
+                if (res == 1)
+                {
+                    return RedirectToPage("/Movie/Index");
+                }
+                else
+                {
+                    ViewData["err"] = "Error occurred use color";
+                    return Page();
+                }
+            }
+            return Page();
+        }
     }
 }
