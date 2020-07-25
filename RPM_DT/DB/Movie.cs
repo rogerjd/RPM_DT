@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -26,5 +27,15 @@ namespace RPM_DT.DB
 
         [BindProperty, Required]
         public string Rating { get; set; }
+
+        public Movie()
+        {
+
+        }
+
+        public Movie(DataRow row)
+        {
+
+        }
     }
 }

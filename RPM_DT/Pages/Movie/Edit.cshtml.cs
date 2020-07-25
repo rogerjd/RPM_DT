@@ -12,7 +12,11 @@ namespace RPM_DT.Pages.Movie
     public class EditModel : PageModel
     {
         IConfiguration _configuration;
-        DataTable Movie;
+        
+        //public DataTable Movie;
+
+        [BindProperty]
+        public DB.Movie Movie { get; set; }
 
         public EditModel(IConfiguration configuration)
         {
@@ -26,7 +30,7 @@ namespace RPM_DT.Pages.Movie
                 return NotFound();
             }
             Movie = DB.Database.GetMovie(_configuration, Id.Value);
-            if (Movie.Rows.Count == 0)
+            if (Movie == null)
             {
                 return NotFound();
             }
