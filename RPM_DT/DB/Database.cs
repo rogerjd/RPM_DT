@@ -22,13 +22,20 @@ namespace RPM_DT.DB
 
         #region "Movie"
         //todo: List<Movie> ???
-        static public DataTable GetMovies(IConfiguration configuration)
+        static public List<Movie> GetMovies(IConfiguration configuration)
         {
             SqlCommand cmd = GetSqlCommand(configuration, "MoviesGet");
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataTable tbl = new DataTable();
             da.Fill(tbl);
-            return tbl;
+            var res = new List<Movie>();
+            Movie m;
+            foreach (DataRow row in tbl.Rows)
+            {
+                m = new Movie(row);
+                res.Add(m);
+            }
+            return res;
         }
 
         internal static int EditMovie(IConfiguration configuration, Movie movie)

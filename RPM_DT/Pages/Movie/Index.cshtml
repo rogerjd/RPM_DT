@@ -10,7 +10,7 @@
 }
 
 <h1>Movies</h1>
-Number of movies @Model.Movie.Rows.Count
+Number of movies @Model.Movies.Count
 <br />
 
 <a asp-page="Create">Create New</a>
@@ -23,16 +23,16 @@ Number of movies @Model.Movie.Rows.Count
         <th>Release Date</th>
         <th>Rating</th>
     </tr>
-    @foreach (DataRow row in Model.Movie.Rows)
+    @foreach (var m in Model.Movies)
     {
 <tr>
-    <td>@row["Title"]</td>
-    <td>@row["Genre"]</td>
-    <td>@row["Price"]</td>
-    <td>@Util.GetFmtdDate(row["ReleaseDate"])</td>
-    <td>@row["Rating"]</td>
+    <td>@m.Title</td>
+    <td>@m.Genre</td>
+    <td>@m.Price</td>
+    <td>@Util.GetFmtdDate(m.ReleaseDate)</td>
+    <td>@m.Rating</td>
     <td>
-        <a asp-page="Edit" asp-route-id="@row["ID"]">Edit</a> |
+        <a asp-page="Edit" asp-route-id="@m.Id">Edit</a> |
     </td>
 </tr>
     }

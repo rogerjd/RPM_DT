@@ -14,7 +14,7 @@ namespace RPM_DT.Pages
     {
         private readonly IConfiguration _configuration;
 
-        public DataTable Movie { get; set; }
+        public List<DB.Movie> Movies { get; set; }
 
         public MoviesModel(IConfiguration configuration)
         {
@@ -23,7 +23,7 @@ namespace RPM_DT.Pages
 
         public void OnGet()
         {
-            Movie = DB.Database.GetMovies(_configuration);
+            Movies = DB.Database.GetMovies(_configuration);
         }
     }
 }
