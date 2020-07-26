@@ -24,6 +24,7 @@ namespace RPM_DT.Pages
         public void OnGet()
         {
             Movies = DB.Database.GetMovies(_configuration);
+            Movies.Sort((a, b) => a.Title.CompareTo(b.Title));
         }
     }
 }
